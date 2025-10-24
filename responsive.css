@@ -1,0 +1,59 @@
+/* Responsive styles for the registration page */
+
+@media (max-width: 768px) {
+    .register-box {
+        padding: 30px 20px;
+        max-width: 90%;
+        transform: scale(1); /* Reset scaling for mobile */
+    }
+
+    .register-header h2 {
+        font-size: 24px; /* Adjust header size for mobile */
+    }
+
+    .form-item label {
+        font-size: 14px; /* Smaller label font size */
+    }
+
+    .form-item input {
+        font-size: 18px; /* Adjust input font size */
+    }
+
+    .input-tip {
+        font-size: 12px; /* Smaller input tip font size */
+    }
+
+    .register-submit {
+        font-size: 18px; /* Adjust button font size */
+    }
+
+    .verify-btn {
+        font-size: 16px; /* Adjust verify button font size */
+    }
+
+    .agreement-text {
+        font-size: 14px; /* Smaller agreement text font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .register-header h2 {
+        font-size: 22px; /* Further adjust header size for smaller screens */
+    }
+
+    .form-item input {
+        font-size: 16px; /* Further adjust input font size */
+    }
+
+    .register-submit {
+        height: 40px; /* Adjust button height */
+    }
+
+    .verify-btn {
+        height: 40px; /* Adjust verify button height */
+    }
+
+    .input-tip {
+        font-size: 11px; /* Further adjust input tip font size */
+    }
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>侧边登录/注册 组件（可独立预览）</title>
+  <!-- 当作为独立页面打开时，引入样式 -->
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <link rel="stylesheet" href="../styles/side-auth.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" defer></script>
+</head>
+<body>
+  <!-- 组件模板：供主页面 fetch 并注入 -->
+  <template id="side-auth-template">
+<div class="side-login login-box" aria-label="侧边登录/注册">
+    <!-- 登录面板 -->
+    <div id="panel-login" class="panel panel-visible">
+        <div class="login-header">
+            <h2>账号登录</h2>
+            <p>欢迎回来，请登录您的账号</p>
+        </div>
+        <form class="auth-form" id="sideLoginForm">
+            <div class="form-group">
+                <input type="text" id="side-username" required placeholder="请输入用户名或手机号">
+            </div>
+            <div class="form-group">
+                <input type="password" id="side-password" required placeholder="请输入密码">
+            </div>
+            <div class="form-options">
+                <label class="remember-me">
+                    <input type="checkbox">
+                    <span>记住密码</span>
+                </label>
+                <a href="#" class="forgot-password">忘记密码？</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">登录</button>
+            <div class="auth-link">
+                <span>还没有账号？</span>
+                <a href="#" id="toRegister">立即注册</a>
+            </div>
+            <div class="oauth-login">
+                <div class="oauth-title"><span>其他登录方式</span></div>
+                <div class="oauth-buttons">
+                    <a href="#" class="oauth-btn wechat" title="微信登录"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="oauth-btn douyin" title="抖音登录"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="oauth-btn alipay" title="支付宝登录"><i class="fab fa-alipay"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- 注册面板 -->
+    <div id="panel-register" class="panel panel-hidden">
+        <div class="register-header">
+            <h2>注册账号</h2>
+            <p>已有账号？<a href="#" id="toLogin">请登录</a></p>
+        </div>
+        <form class="register-form" id="sideRegisterForm">
+            <div class="form-item">
+                <label for="side-phone">手机号码</label>
+                <div class="input-wrapper">
+                    <div class="area-code">+86</div>
+                    <input type="tel" id="side-phone" required placeholder="请输入手机号码">
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label for="side-verifyCode">验证码</label>
+                <div class="input-group">
+                    <input type="text" id="side-verifyCode" placeholder="请输入验证码">
+                    <button type="button" id="sendCodeBtnSide" class="verify-btn">发送验证码</button>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label for="side-password-register">设置密码</label>
+                <input type="password" id="side-password-register" required placeholder="请设置登录密码">
+                <p class="input-tip">密码由6-20位字母、数字或符号组成</p>
+            </div>
+
+            <div class="form-item">
+                <label for="side-confirm-password">确认密码</label>
+                <input type="password" id="side-confirm-password" required placeholder="请再次输入密码">
+            </div>
+
+            <div class="agreement-section">
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" id="side-agreement">
+                    <span class="agreement-text">我已阅读并同意 <a href="#">服务协议</a> 与 <a href="#">隐私政策</a></span>
+                </label>
+            </div>
+
+            <button type="submit" class="register-submit">立即注册</button>
+        </form>
+    </div>
+</div>
+  </template>
+
+  <!-- 当独立打开时，直接把模板内容注入页面并加载交互脚本用于预览 -->
+  <div id="side-auth-demo-root" style="padding:24px;"></div>
+
+  <script>
+    (function(){
+      // 把 template 注入到 demo root，方便单独预览
+      const tpl = document.getElementById('side-auth-template');
+      if (tpl) {
+        document.getElementById('side-auth-demo-root').appendChild(tpl.content.cloneNode(true));
+      }
+      // 仅在独立打开时，加载基础脚本（不重复加载时可删或改为引用你的脚本）
+      // 这里不包含 fetch 的逻辑，主页面仍可通过 fetch/DOMParser 获取 template
+      // 简单绑定切换逻辑以便本页预览可交互
+      function bindDemo() {
+        const panelLogin = document.getElementById('panel-login');
+        const panelRegister = document.getElementById('panel-register');
+        const toRegister = document.getElementById('toRegister');
+        const toLogin = document.getElementById('toLogin');
+
+        function showRegister() {
+          panelLogin && panelLogin.classList.replace('panel-visible','panel-hidden');
+          panelRegister && panelRegister.classList.replace('panel-hidden','panel-visible');
+        }
+        function showLogin() {
+          panelRegister && panelRegister.classList.replace('panel-visible','panel-hidden');
+          panelLogin && panelLogin.classList.replace('panel-hidden','panel-visible');
+        }
+        if (toRegister) toRegister.addEventListener('click', e => { e.preventDefault(); showRegister(); });
+        if (toLogin) toLogin.addEventListener('click', e => { e.preventDefault(); showLogin(); });
+      }
+      bindDemo();
+    })();
+  </script>
+
+  <!-- 独立预览时方便调用现有验证/认证脚本（如果脚本路径不同请调整） -->
+  <script src="../scripts/form-validation.js"></script>
+  <script src="../scripts/auth.js"></script>
+</body>
+</html>

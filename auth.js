@@ -1,3 +1,4 @@
+// filepath: login-website/src/scripts/auth.js
 // 认证相关功能
 
 // 发送验证码

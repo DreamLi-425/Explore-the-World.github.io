@@ -1,0 +1,93 @@
+/* 仅与侧边登录/注册相关的样式，复用全局变量与基础样式 */
+
+/* 右侧面板定位（保留此前行为） */
+.side-login {
+    position: fixed;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    width: 380px;
+    max-width: calc(100% - 60px);
+
+    /* 玻璃雾感 */
+    background: rgba(255,255,255,0.62);
+    -webkit-backdrop-filter: blur(8px) saturate(1.05);
+    backdrop-filter: blur(8px) saturate(1.05);
+    border: 1px solid rgba(255,255,255,0.6);
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.12);
+    border-radius: 14px;
+    padding: 18px;
+}
+
+/* 响应 */
+@media (max-width: 900px) {
+    .side-login {
+        position: static;
+        transform: none;
+        margin: 20px auto 0;
+        width: min(92%, 420px);
+    }
+}
+
+/* 小屏 */
+@media (max-width: 480px) {
+    .side-login { width: 94%; padding:14px; border-radius:10px; }
+}
+
+/* 面板切换基样式 */
+.panel {
+    transition: opacity 220ms ease, transform 220ms ease;
+    will-change: opacity, transform;
+}
+.panel-hidden {
+    opacity: 0;
+    transform: translateY(6px) scale(0.995);
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
+}
+.panel-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    height: auto;
+    overflow: visible;
+}
+
+/* 标题、表单及控件视觉统一（复用全局变量） */
+.side-login .login-header,
+.side-login .register-header { text-align:center; margin-bottom:14px; }
+.side-login .login-header h2,
+.side-login .register-header h2 { font-size:20px; color:var(--text-color,#333); margin-bottom:6px; font-weight:600; }
+.side-login .login-header p,
+.side-login .register-header p { font-size:13px; color:var(--text-light,#666); margin:0; }
+
+.side-login .auth-form,
+.side-login .register-form { display:flex; flex-direction:column; gap:12px; align-items:stretch; margin:0; }
+
+.side-login input[type="text"],
+.side-login input[type="password"],
+.side-login input[type="tel"],
+.side-login input[type="email"],
+.side-login .input-wrapper input,
+.side-login .input-group input {
+    height:44px; padding:8px 12px; border-radius:8px;
+    border:1px solid rgba(0,0,0,0.08); font-size:15px;
+    transition: box-shadow .15s ease, border-color .15s ease;
+    background: rgba(255,255,255,0.92);
+}
+.side-login input:focus { outline:none; border-color:rgba(24,144,255,0.9); box-shadow:0 6px 16px rgba(24,144,255,0.08); }
+
+.side-login .area-code { background:rgba(250,250,250,0.9); border-radius:8px; height:44px; line-height:44px; padding:0 12px; border:1px solid rgba(0,0,0,0.04); font-size:14px; color:var(--text-color,#333); display:flex; align-items:center; justify-content:center; min-width:64px; }
+.side-login .input-group { display:flex; gap:8px; align-items:center; }
+.side-login .verify-btn { min-width:120px; height:44px; padding:0 14px; border-radius:8px; border:1px solid var(--primary-color,#1890ff); background:transparent; color:var(--primary-color,#1890ff); cursor:pointer; font-weight:600; }
+.side-login .verify-btn:disabled { border-color:var(--border-color,#e8e8e8); color:#999; cursor:not-allowed; }
+
+.side-login .register-submit,
+.side-login .btn-full { width:100%; }
+.side-login .register-submit { height:46px; border-radius:999px; background:var(--primary-color,#1890ff); color:#fff; border:none; font-weight:600; box-shadow:0 6px 18px rgba(24,144,255,0.12); transition:transform .12s ease, box-shadow .12s ease; }
+.side-login .register-submit:hover { transform:translateY(-2px); background:var(--primary-hover,#40a9ff); }
+
+.checkbox-wrapper { display:flex; align-items:flex-start; gap:10px; cursor:pointer; }
+.agreement-text { font-size:13px; color:var(--text-light,#666); line-height:1.5; }

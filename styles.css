@@ -1,3 +1,4 @@
+/* filepath: login-website/src/styles/styles.css */
 :root {
     --primary-color: #1890ff;
     --primary-hover: #40a9ff;
@@ -48,49 +49,72 @@ body.auth-page::before {
 
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 400px; /* Adjusted for better layout */
     margin: 0 auto;
     position: relative;
     z-index: 1;
 }
 
-/* 主页样式 */
+/* Header styles */
 .main-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px; /* Adjusted spacing */
 }
 
 .main-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
+    font-size: 2rem; /* Adjusted font size */
+    margin-bottom: 10px; /* Adjusted spacing */
     color: var(--text-color);
 }
 
 .main-header p {
-    font-size: 1.2rem;
+    font-size: 1rem; /* Adjusted font size */
     color: var(--text-light);
-}
-
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 60px;
 }
 
 .main-footer {
+    position: fixed;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
     text-align: center;
-    color: var(--text-light);
-    font-size: 0.9rem;
+    padding: 0;
+    font-size: 15px;
+    z-index: 100;
+    pointer-events: none; /* 防止干扰其他交互 */
 }
 
-/* 按钮样式 */
+.main-footer p {
+    margin: 0;
+    color: var(--text-color, #333);
+    font-weight: 500;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 8px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    pointer-events: auto; /* 恢复文字的可选性 */
+}
+
+/* 确保主体内容不会与footer重叠 */
+.container {
+    padding-bottom: 80px; /* 为footer留出空间 */
+}
+
+/* Button styles */
+.action-buttons {
+    display: flex;
+    justify-content: space-between; /* Adjusted for better spacing */
+    margin-bottom: 40px; /* Adjusted spacing */
+}
+
 .btn {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 10px 20px; /* Adjusted padding */
     border: none;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 14px; /* Adjusted font size */
     font-weight: 500;
     text-decoration: none;
     text-align: center;
@@ -119,64 +143,79 @@ body.auth-page::before {
     background-color: #f0f7ff;
 }
 
-.btn-full {
-    width: 100%;
-}
-
-/* 认证表单样式 */
+/* Auth form styles */
 .auth-form {
     background: var(--background-color);
-    padding: 40px;
+    padding: 30px; /* Adjusted padding */
     border-radius: 8px;
     box-shadow: var(--box-shadow);
     width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
 }
 
-.login-box, .register-box {
-    background: var(--background-color);
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
-    width: 100%;
-    max-width: 440px;
-    margin: 0 auto;
+/* 登录卡片：玻璃雾感 (glassmorphism) 美化 */
+.login-box {
+    /* 保留背景配色不变，仅为卡片添加半透明玻璃效果 */
+    background: rgba(255, 255, 255, 0.62);
+    -webkit-backdrop-filter: blur(8px) saturate(1.05);
+    backdrop-filter: blur(8px) saturate(1.05);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.12);
+    border-radius: 14px;
+    padding: 32px;
+    position: relative;
+}
+
+/* 表单内部微调，保持输入元素宽度但易于布局 */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+}
+
+/* 将登录按钮居中、圆角自然（胶囊形），在窄屏改为占满宽度 */
+.auth-form .btn-full {
+    display: inline-block;
+    width: auto;               /* 不强制撑满，便于居中 */
+    padding: 12px 44px;
+    margin: 12px auto 0;       /* 横向居中 */
+    border-radius: 999px;      /* 自然的胶囊圆角 */
+    box-shadow: 0 6px 18px rgba(24, 144, 255, 0.12);
+}
+
+/* 悬停效果微调（配合原有 .btn-primary:hover） */
+.auth-form .btn-full:hover {
+    transform: translateY(-2px);
 }
 
 .login-header, .register-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px; /* Adjusted spacing */
 }
 
 .login-header h2, .register-header h2 {
-    font-size: 24px;
+    font-size: 22px; /* Adjusted font size */
     color: var(--text-color);
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Adjusted spacing */
 }
 
 .login-header p, .register-header p {
     color: var(--text-light);
-    font-size: 14px;
+    font-size: 12px; /* Adjusted font size */
 }
 
-.register-header a {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-/* 表单元素样式 */
+/* Form element styles */
 .form-group, .form-item {
-    margin-bottom: 24px;
+    margin-bottom: 20px; /* Adjusted spacing */
     position: relative;
 }
 
 .form-group input, .form-item input {
     width: 100%;
-    height: 44px;
-    padding: 8px 16px;
-    font-size: 14px;
+    height: 40px; /* Adjusted height */
+    padding: 8px 12px; /* Adjusted padding */
+    font-size: 14px; /* Adjusted font size */
     border: 1px solid var(--border-color);
     border-radius: 6px;
     transition: all 0.3s ease;
@@ -188,13 +227,6 @@ body.auth-page::before {
     box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
 }
 
-.form-item label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: var(--text-color);
-}
-
 .input-wrapper {
     display: flex;
     align-items: center;
@@ -203,13 +235,13 @@ body.auth-page::before {
 }
 
 .area-code {
-    padding: 0 16px;
+    padding: 0 12px; /* Adjusted padding */
     color: var(--text-color);
     background: #fafafa;
     border-right: 1px solid var(--border-color);
-    height: 44px;
-    line-height: 44px;
-    font-size: 14px;
+    height: 40px; /* Adjusted height */
+    line-height: 40px; /* Adjusted line height */
+    font-size: 14px; /* Adjusted font size */
     border-radius: 6px 0 0 6px;
 }
 
@@ -220,18 +252,18 @@ body.auth-page::before {
 
 .input-group {
     display: flex;
-    gap: 8px;
+    gap: 8px; /* Adjusted gap */
 }
 
 .verify-btn {
-    padding: 0 15px;
-    height: 44px;
+    padding: 0 12px; /* Adjusted padding */
+    height: 40px; /* Adjusted height */
     border: 1px solid var(--primary-color);
     background: transparent;
     color: var(--primary-color);
     border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 14px; /* Adjusted font size */
     white-space: nowrap;
     transition: all 0.3s ease;
 }
@@ -244,7 +276,7 @@ body.auth-page::before {
 
 .input-tip {
     margin-top: 4px;
-    font-size: 12px;
+    font-size: 12px; /* Adjusted font size */
     color: var(--text-light);
 }
 
@@ -252,7 +284,7 @@ body.auth-page::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 20px; /* Adjusted spacing */
 }
 
 .remember-me {
@@ -260,17 +292,17 @@ body.auth-page::before {
     align-items: center;
     gap: 6px;
     color: var(--text-color);
-    font-size: 14px;
+    font-size: 14px; /* Adjusted font size */
 }
 
 .forgot-password {
     color: var(--primary-color);
-    font-size: 14px;
+    font-size: 14px; /* Adjusted font size */
     text-decoration: none;
 }
 
 .agreement-section {
-    margin: 24px 0;
+    margin: 20px 0; /* Adjusted spacing */
 }
 
 .checkbox-wrapper {
@@ -281,7 +313,7 @@ body.auth-page::before {
 }
 
 .agreement-text {
-    font-size: 12px;
+    font-size: 12px; /* Adjusted font size */
     color: var(--text-light);
 }
 
@@ -292,8 +324,8 @@ body.auth-page::before {
 
 .auth-link {
     text-align: center;
-    margin: 24px 0;
-    font-size: 14px;
+    margin: 20px 0; /* Adjusted spacing */
+    font-size: 14px; /* Adjusted font size */
 }
 
 .auth-link a {
@@ -303,21 +335,21 @@ body.auth-page::before {
     font-weight: 500;
 }
 
-/* OAuth登录样式 */
+/* OAuth login styles */
 .oauth-login {
-    margin-top: 24px;
+    margin-top: 20px; /* Adjusted spacing */
 }
 
 .oauth-title {
     position: relative;
     text-align: center;
-    margin: 32px 0 24px;
+    margin: 20px 0; /* Adjusted spacing */
 }
 
 .oauth-title span {
     background: var(--background-color);
     padding: 0 16px;
-    font-size: 14px;
+    font-size: 14px; /* Adjusted font size */
     color: var(--text-light);
     position: relative;
     z-index: 1;
@@ -337,12 +369,12 @@ body.auth-page::before {
 .oauth-buttons {
     display: flex;
     justify-content: center;
-    gap: 32px;
+    gap: 20px; /* Adjusted gap */
 }
 
 .oauth-btn {
-    width: 48px;
-    height: 48px;
+    width: 40px; /* Adjusted width */
+    height: 40px; /* Adjusted height */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -358,7 +390,7 @@ body.auth-page::before {
 }
 
 .oauth-btn i {
-    font-size: 24px;
+    font-size: 20px; /* Adjusted font size */
 }
 
 .oauth-btn.wechat i {
@@ -373,28 +405,70 @@ body.auth-page::before {
     color: #1677FF;
 }
 
-/* 响应式设计 */
+/* Responsive design */
 @media (max-width: 768px) {
-    .auth-form, .login-box, .register-box {
-        padding: 30px 20px;
+    .container {
+        max-width: 90%; /* Adjusted for better mobile layout */
     }
-    
+
+    .auth-form, .login-box, .register-box {
+        padding: 20px; /* Adjusted padding */
+    }
+
     .action-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .oauth-buttons {
-        gap: 24px;
+        gap: 16px; /* Adjusted gap */
     }
-    
+
     .form-options {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 12px; /* Adjusted gap */
     }
-    
+
     .forgot-password {
         align-self: flex-end;
     }
+
+
+    .main-footer {
+        position: static; /* 在移动端取消固定定位 */
+        margin-top: 40px;
+        font-size: 18px;
+    }
+    
+    .container {
+        padding-bottom: 24px; /* 恢复原有的底部间距 */
+    }
+    
+    .main-footer p {
+        background: transparent;
+        backdrop-filter: none;
+        box-shadow: none;
+        padding: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 20px;
+        width: 94%;
+    }
+
+    .auth-form .btn-full {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        margin: 8px 0 0;
+    }
+
+    .main-footer {
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
 }
